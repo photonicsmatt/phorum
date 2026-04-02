@@ -14,44 +14,21 @@ interface VoteButtonsProps {
 
 export default function VoteButtons({
   score: initialScore,
-  postId,
-  commentId,
   layout = "vertical",
 }: VoteButtonsProps) {
   const { user } = useUser();
   const [score, setScore] = useState(initialScore);
   const [userVote, setUserVote] = useState<number>(0);
-  const [loading, setLoading] = useState(false);
 
-  const vote = async (value: number) => {
-    if (!user || loading) return;
+  const vote = (value: number) => {
+    if (!user) return;
 
-    const prevScore = score;
-    const prevVote = userVote;
-
-    // Optimistic update
     if (userVote === value) {
       setScore(score - value);
       setUserVote(0);
     } else {
       setScore(score - userVote + value);
       setUserVote(value);
-    }
-
-    setLoading(true);
-    try {
-      const res = await fetch("/api/vote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.id, postId, commentId, value }),
-      });
-      if (!res.ok) throw new Error();
-    } catch {
-      // Rollback on error
-      setScore(prevScore);
-      setUserVote(prevVote);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -69,7 +46,6 @@ export default function VoteButtons({
             ? "text-photon-400 bg-photon-400/10"
             : "text-dark-muted hover:text-photon-400 hover:bg-dark-hover"
         }`}
-        disabled={!user}
         title={user ? "Upvote" : "Join to vote"}
       >
         <ChevronUp className={isVertical ? "w-5 h-5" : "w-4 h-4"} />
@@ -92,7 +68,6 @@ export default function VoteButtons({
             ? "text-red-400 bg-red-400/10"
             : "text-dark-muted hover:text-red-400 hover:bg-dark-hover"
         }`}
-        disabled={!user}
         title={user ? "Downvote" : "Join to vote"}
       >
         <ChevronDown className={isVertical ? "w-5 h-5" : "w-4 h-4"} />

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { UserProvider } from "@/components/providers/UserProvider";
-import Navbar from "@/components/layout/Navbar";
 
 export const metadata: Metadata = {
   title: "The Phorum — Photonics Community",
@@ -20,8 +19,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <UserProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
+            {children}
           </UserProvider>
         </ThemeProvider>
       </body>

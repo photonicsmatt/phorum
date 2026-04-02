@@ -15,7 +15,6 @@ interface CommentFormProps {
 }
 
 export default function CommentForm({
-  postId,
   parentId,
   onSubmit,
   onCancel,
@@ -24,10 +23,9 @@ export default function CommentForm({
 }: CommentFormProps) {
   const { user } = useUser();
   const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {
       setShowLogin(true);
@@ -35,23 +33,15 @@ export default function CommentForm({
     }
     if (!content.trim()) return;
 
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/posts/${postId}/comments`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content: content.trim(),
-          userId: user.id,
-          parentId,
-        }),
-      });
-      const comment = await res.json();
-      onSubmit(comment);
-      setContent("");
-    } finally {
-      setLoading(false);
-    }
+    onSubmit({
+      id: `comment_${Date.now()}`,
+      body: content.trim(),
+      score: 0,
+      createdAt: new Date().toISOString(),
+      parentId: parentId || null,
+      author: { id: user.id, username: user.username, displayName: user.displayName },
+    });
+    setContent("");
   };
 
   return (
@@ -65,8 +55,8 @@ export default function CommentForm({
           className="w-full px-3 py-2 bg-dark-bg border border-dark-border rounded-lg text-sm text-dark-text placeholder:text-dark-muted focus:outline-none focus:border-photon-500 focus:ring-1 focus:ring-photon-500 transition-colors resize-y"
         />
         <div className="flex items-center gap-2">
-          <Button type="submit" size="sm" disabled={loading || !content.trim()}>
-            {loading ? "Posting..." : "Comment"}
+          <Button type="submit" size="sm" disabled={!content.trim()}>
+            Comment
           </Button>
           {onCancel && (
             <Button type="button" size="sm" variant="ghost" onClick={onCancel}>

@@ -39,16 +39,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = useCallback(async (username: string): Promise<UserState> => {
-    const res = await fetch("/api/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username }),
-    });
-    const data = await res.json();
     const userState: UserState = {
-      id: data.id,
-      username: data.username,
-      displayName: data.displayName,
+      id: `user_${Date.now()}`,
+      username,
+      displayName: username,
     };
     setUser(userState);
     localStorage.setItem("phorum-user", JSON.stringify(userState));
