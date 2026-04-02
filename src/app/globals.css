@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-photon-50: #ecfeff;
+  --color-photon-100: #cffafe;
+  --color-photon-200: #a5f3fc;
+  --color-photon-300: #67e8f9;
+  --color-photon-400: #22d3ee;
+  --color-photon-500: #06b6d4;
+  --color-photon-600: #0891b2;
+  --color-photon-700: #0e7490;
+  --color-photon-800: #155e75;
+  --color-photon-900: #164e63;
+  --color-photon-950: #083344;
+
+  --color-dark-bg: #0f1117;
+  --color-dark-card: #1a1d27;
+  --color-dark-border: #2a2d3a;
+  --color-dark-text: #e2e8f0;
+  --color-dark-muted: #94a3b8;
+  --color-dark-hover: #232636;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Dark mode (default) */
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Light mode override */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border);
+  border-radius: 4px;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+/* Markdown content styling */
+.prose-phorum h1,
+.prose-phorum h2,
+.prose-phorum h3 {
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-phorum p {
+  margin-bottom: 0.75em;
+  line-height: 1.7;
+}
+
+.prose-phorum code {
+  background: var(--color-dark-card);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+html.light .prose-phorum code {
+  background: #e2e8f0;
+}
+
+.prose-phorum pre {
+  background: var(--color-dark-card);
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+
+html.light .prose-phorum pre {
+  background: #f1f5f9;
+}
+
+.prose-phorum pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.prose-phorum blockquote {
+  border-left: 3px solid var(--color-photon-500);
+  padding-left: 1em;
+  margin-left: 0;
+  color: var(--color-dark-muted);
+}
+
+.prose-phorum a {
+  color: var(--color-photon-400);
+  text-decoration: underline;
+}
+
+.prose-phorum ul,
+.prose-phorum ol {
+  padding-left: 1.5em;
+  margin-bottom: 0.75em;
+}
+
+.prose-phorum li {
+  margin-bottom: 0.25em;
+}
