@@ -5,28 +5,27 @@
   --color-photon-100: #cffafe;
   --color-photon-200: #a5f3fc;
   --color-photon-300: #67e8f9;
-  --color-photon-400: #22d3ee;
-  --color-photon-500: #06b6d4;
+  --color-photon-400: #0891b2;
+  --color-photon-500: #0e7490;
   --color-photon-600: #0891b2;
   --color-photon-700: #0e7490;
   --color-photon-800: #155e75;
   --color-photon-900: #164e63;
   --color-photon-950: #083344;
 
-  --color-dark-bg: #0f1117;
-  --color-dark-card: #1a1d27;
-  --color-dark-border: #2a2d3a;
-  --color-dark-text: #e2e8f0;
-  --color-dark-muted: #94a3b8;
-  --color-dark-hover: #232636;
+  --color-dark-bg: #f8fafc;
+  --color-dark-card: #ffffff;
+  --color-dark-border: #e2e8f0;
+  --color-dark-text: #1e293b;
+  --color-dark-muted: #64748b;
+  --color-dark-hover: #f1f5f9;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-/* Dark mode (default) */
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
@@ -35,14 +34,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Light mode override */
-html.light {
-  color-scheme: light;
+/* Dark mode override */
+html.dark {
+  color-scheme: dark;
 }
 
-html.light body {
-  background-color: #f8fafc;
-  color: #1e293b;
+html.dark body {
+  background-color: #0f1117;
+  color: #e2e8f0;
 }
 
 /* Scrollbar styling */
@@ -51,20 +50,20 @@ html.light body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-dark-bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-dark-border);
-  border-radius: 4px;
-}
-
-html.light ::-webkit-scrollbar-track {
   background: #f1f5f9;
 }
 
-html.light ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #cbd5e1;
+  border-radius: 4px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0f1117;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #2a2d3a;
 }
 
 /* Markdown content styling */
@@ -82,26 +81,26 @@ html.light ::-webkit-scrollbar-thumb {
 }
 
 .prose-phorum code {
-  background: var(--color-dark-card);
+  background: #f1f5f9;
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.9em;
 }
 
-html.light .prose-phorum code {
-  background: #e2e8f0;
+html.dark .prose-phorum code {
+  background: #1a1d27;
 }
 
 .prose-phorum pre {
-  background: var(--color-dark-card);
+  background: #f1f5f9;
   padding: 1em;
   border-radius: 8px;
   overflow-x: auto;
   margin-bottom: 1em;
 }
 
-html.light .prose-phorum pre {
-  background: #f1f5f9;
+html.dark .prose-phorum pre {
+  background: #1a1d27;
 }
 
 .prose-phorum pre code {
@@ -117,7 +116,7 @@ html.light .prose-phorum pre {
 }
 
 .prose-phorum a {
-  color: var(--color-photon-400);
+  color: var(--color-photon-500);
   text-decoration: underline;
 }
 
